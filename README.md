@@ -160,6 +160,14 @@ terraform init -backend=false
 terraform validate
 ```
 
+### Automated Testing
+
+Run the test script to validate all modules and examples:
+
+```bash
+./scripts/test.sh
+```
+
 The GitHub Actions workflow automatically runs these checks on every push and pull request.
 
 ## CI/CD
@@ -172,11 +180,14 @@ The repository includes a GitHub Actions workflow (`.github/workflows/terraform-
 
 ## Contributing
 
+We welcome contributions! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
+
 1. Fork the repository
 2. Create a feature branch
 3. Make your changes
-4. Ensure all validation passes (`terraform fmt` and `terraform validate`)
-5. Submit a pull request
+4. Run tests: `./scripts/test.sh`
+5. Ensure all validation passes (`terraform fmt` and `terraform validate`)
+6. Submit a pull request
 
 ## License
 
