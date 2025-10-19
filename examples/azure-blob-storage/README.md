@@ -1,6 +1,6 @@
-# Azure File Storage Example
+# Azure Blob Storage Example
 
-This example demonstrates how to use the Azure File Storage module.
+This example demonstrates how to use the Azure Blob Storage module.
 
 ## Usage
 

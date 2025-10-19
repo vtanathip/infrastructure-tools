@@ -19,12 +19,12 @@ infrastructure-tools/
 ├── modules/                      # Reusable Terraform modules
 │   ├── azure-vm-network/        # Azure Windows VM with network
 │   ├── aws-vm-network/          # AWS Windows VM with network
-│   ├── azure-file-storage/      # Azure File Storage
+│   ├── azure-blob-storage/      # Azure Blob Storage
 │   └── aws-s3-storage/          # AWS S3 Storage
 ├── examples/                     # Example configurations
 │   ├── azure-vm/                # Azure VM example
 │   ├── aws-vm/                  # AWS VM example
-│   ├── azure-storage/           # Azure storage example
+│   ├── azure-blob-storage/      # Azure blob storage example
 │   └── aws-storage/             # AWS storage example
 └── .github/workflows/           # CI/CD workflows
     └── terraform-validate.yml   # Terraform validation workflow
@@ -80,11 +80,12 @@ Creates Azure Storage Account with File Share:
 **Usage:**
 ```hcl
 module "azure_storage" {
-  source = "./modules/azure-file-storage"
+  source = "./modules/azure-blob-storage"
 
-  resource_group_name  = "my-storage-rg"
-  storage_account_name = "mystorageacct123"
-  file_share_name      = "myfileshare"
+  resource_group_name   = "my-storage-rg"
+  storage_account_name  = "mystorageacct123"
+  container_name        = "myblobcontainer"
+  container_access_type = "private"
 }
 ```
 

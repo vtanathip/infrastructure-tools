@@ -11,11 +11,22 @@ resource "azurerm_storage_account" "main" {
   account_tier             = var.account_tier
   account_replication_type = var.replication_type
   account_kind             = "StorageV2"
-  tags                     = var.tags
+  
+  blob_properties {
+    versioning_enabled = var.blob_versioning_enabled
+    delete_retention_policy {
+      days = var.blob_delete_retention_days
+    }
+    container_delete_retention_policy {
+      days = var.container_delete_retention_days
+    }
+  }
+  
+  tags = var.tags
 }
 
-resource "azurerm_storage_share" "main" {
-  name                 = var.file_share_name
-  storage_account_name = azurerm_storage_account.main.name
-  quota                = var.quota_gb
+resource "azurerm_storage_container" "main" {
+  name                  = var.container_name
+  storage_account_id    = azurerm_storage_account.main.id
+  container_access_type = var.container_access_type
 }

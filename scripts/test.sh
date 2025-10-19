@@ -18,11 +18,11 @@ fi
 DIRS=(
     "modules/azure-vm-network"
     "modules/aws-vm-network"
-    "modules/azure-file-storage"
+    "modules/azure-blob-storage"
     "modules/aws-s3-storage"
     "examples/azure-vm"
     "examples/aws-vm"
-    "examples/azure-storage"
+    "examples/azure-blob-storage"
     "examples/aws-storage"
 )
 
