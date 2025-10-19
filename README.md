@@ -29,9 +29,11 @@ After using this template, you'll have:
 
 - **Multi-Cloud Support**: Azure and AWS providers
 - **Modular Design**: Reusable Terraform modules
-- **Two Key Scenarios**:
+- **Key Infrastructure Scenarios**:
   1. Windows VM with networking (Azure & AWS)
-  2. File storage services (Azure Files & AWS S3)
+  2. Object storage services (Azure Blob Storage & AWS S3)
+  3. Multi-module infrastructure patterns
+- **Environment Structure**: Pre-configured dev/staging/prod environments
 - **CI/CD Ready**: GitHub Actions workflow for validation
 - **Best Practices**: Security, modularity, and minimal configuration
 
@@ -53,13 +55,18 @@ infrastructure-tools/
 ├── environments/                 # Environment-specific configurations
 │   ├── dev/                     # Development environment
 │   ├── staging/                 # Staging environment
-│   └── prod/                    # Production environment
+│   ├── prod/                    # Production environment
+│   └── README.md                # Environment usage guide
 ├── scripts/                     # Utility scripts
+│   ├── test.sh                  # Validation script for all modules
+│   └── README.md                # Scripts documentation
 ├── .github/workflows/           # CI/CD workflows
-└── docs/                        # Documentation
-    ├── QUICK_START.md           # Getting started guide
-    ├── TERRAFORM_BASICS.md      # Terraform fundamentals
-    └── CUSTOMIZATION.md         # Template customization guide
+│   └── terraform-validate.yml   # Terraform validation workflow
+├── QUICK_START.md               # Getting started guide
+├── TERRAFORM_BASICS.md          # Terraform fundamentals
+├── CUSTOMIZATION.md             # Template customization guide
+├── CONTRIBUTING.md              # Contribution guidelines
+└── README.md                    # This file
 ```
 
 ## Modules
@@ -103,21 +110,24 @@ module "aws_vm" {
 }
 ```
 
-### Azure File Storage
-Creates Azure Storage Account with File Share:
+### Azure Blob Storage
+Creates Azure Storage Account with Blob Container for object storage:
 - Resource Group
-- Storage Account
-- File Share with configurable quota
+- Storage Account with blob properties
+- Blob Container with configurable access policies
+- Optional versioning and retention policies
 
 **Usage:**
 ```hcl
 module "azure_storage" {
   source = "./modules/azure-blob-storage"
 
-  resource_group_name   = "my-storage-rg"
-  storage_account_name  = "mystorageacct123"
-  container_name        = "myblobcontainer"
-  container_access_type = "private"
+  resource_group_name         = "my-storage-rg"
+  storage_account_name        = "mystorageacct123"
+  container_name              = "myblobcontainer"
+  container_access_type       = "private"
+  blob_versioning_enabled     = true
+  blob_delete_retention_days  = 30
 }
 ```
 
