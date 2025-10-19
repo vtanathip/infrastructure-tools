@@ -11,7 +11,7 @@ resource "azurerm_storage_account" "main" {
   account_tier             = var.account_tier
   account_replication_type = var.replication_type
   account_kind             = "StorageV2"
-  
+
   blob_properties {
     versioning_enabled = var.blob_versioning_enabled
     delete_retention_policy {
@@ -21,12 +21,12 @@ resource "azurerm_storage_account" "main" {
       days = var.container_delete_retention_days
     }
   }
-  
+
   tags = var.tags
 }
 
 resource "azurerm_storage_container" "main" {
-  name                 = var.container_name
-  storage_account_name = azurerm_storage_account.main.name
+  name                  = var.container_name
+  storage_account_name  = azurerm_storage_account.main.name
   container_access_type = var.container_access_type
 }

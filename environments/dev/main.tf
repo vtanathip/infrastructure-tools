@@ -24,19 +24,19 @@ provider "azurerm" {
 module "app_infrastructure" {
   source = "../../modules/azure-vm-network"
 
-  resource_group_name     = var.resource_group_name
-  location               = var.location
-  prefix                 = var.prefix
-  vnet_address_space     = "10.0.0.0/16"
-  subnet_address_prefix  = "10.0.1.0/24"
-  
+  resource_group_name   = var.resource_group_name
+  location              = var.location
+  prefix                = var.prefix
+  vnet_address_space    = "10.0.0.0/16"
+  subnet_address_prefix = "10.0.1.0/24"
+
   # Development-specific VM settings
-  vm_size        = "Standard_B1s"  # Smaller size for dev
+  vm_size        = "Standard_B1s" # Smaller size for dev
   admin_username = var.admin_username
   admin_password = var.admin_password
   windows_sku    = "2022-Datacenter"
-  os_disk_type   = "Standard_LRS"  # Standard storage for dev
-  
+  os_disk_type   = "Standard_LRS" # Standard storage for dev
+
   tags = local.common_tags
 }
 
@@ -44,14 +44,14 @@ module "app_infrastructure" {
 module "app_storage" {
   source = "../../modules/azure-blob-storage"
 
-  resource_group_name         = var.resource_group_name
+  resource_group_name        = var.resource_group_name
   location                   = var.location
   storage_account_name       = "${var.storage_prefix}app${random_string.suffix.result}"
   container_name             = "app-data"
   container_access_type      = "private"
-  blob_versioning_enabled    = false  # Disabled for dev to save costs
-  blob_delete_retention_days = 7       # Shorter retention for dev
-  
+  blob_versioning_enabled    = false # Disabled for dev to save costs
+  blob_delete_retention_days = 7     # Shorter retention for dev
+
   tags = local.common_tags
 }
 
@@ -59,14 +59,14 @@ module "app_storage" {
 module "log_storage" {
   source = "../../modules/azure-blob-storage"
 
-  resource_group_name         = var.resource_group_name
+  resource_group_name        = var.resource_group_name
   location                   = var.location
   storage_account_name       = "${var.storage_prefix}logs${random_string.suffix.result}"
   container_name             = "application-logs"
   container_access_type      = "private"
   blob_versioning_enabled    = false
-  blob_delete_retention_days = 3       # Very short retention for dev logs
-  
+  blob_delete_retention_days = 3 # Very short retention for dev logs
+
   tags = merge(local.common_tags, {
     Purpose = "Logging"
   })
@@ -82,11 +82,11 @@ resource "random_string" "suffix" {
 # Common tags for all resources
 locals {
   common_tags = {
-    Environment    = "Development"
-    Project       = var.project_name
-    ManagedBy     = "Terraform"
-    CostCenter    = "Engineering"
-    Owner         = var.owner_email
-    CreatedDate   = formatdate("YYYY-MM-DD", timestamp())
+    Environment = "Development"
+    Project     = var.project_name
+    ManagedBy   = "Terraform"
+    CostCenter  = "Engineering"
+    Owner       = var.owner_email
+    CreatedDate = formatdate("YYYY-MM-DD", timestamp())
   }
 }
