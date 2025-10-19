@@ -1,0 +1,19 @@
+# Required Variables - Update these values
+resource_group_name        = "example-multimodule-rg"
+prefix                    = "multimod"
+admin_password            = "YourSecurePassword123!"
+storage_account_name      = "multimodstorage123"      # Must be globally unique
+log_storage_account_name  = "multimodlogs123"        # Must be globally unique
+
+# Optional Variables - Modify as needed
+location       = "East US"
+vm_size        = "Standard_B2s"
+admin_username = "azureadmin"
+
+# Tags
+tags = {
+  Environment = "Development"
+  Project     = "MultiModule"
+  ManagedBy   = "Terraform"
+  Owner       = "YourName"
+}

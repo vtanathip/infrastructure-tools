@@ -25,6 +25,7 @@ infrastructure-tools/
 │   ├── azure-vm/                # Azure VM example
 │   ├── aws-vm/                  # AWS VM example
 │   ├── azure-blob-storage/      # Azure blob storage example
+│   ├── azure-multi-module/      # Multi-module Azure infrastructure
 │   └── aws-storage/             # AWS storage example
 └── .github/workflows/           # CI/CD workflows
     └── terraform-validate.yml   # Terraform validation workflow
@@ -105,6 +106,38 @@ module "aws_storage" {
   enable_versioning = true
 }
 ```
+
+## Multi-Module Infrastructure Example
+
+The `azure-multi-module` example demonstrates how to combine multiple Terraform modules to create a comprehensive Azure infrastructure solution.
+
+**Components deployed:**
+- **Azure VM with Network**: Windows Server 2022 with virtual network, subnet, and public IP
+- **Application Storage**: Blob storage for application data with versioning enabled
+- **Log Storage**: Separate blob storage for application logs with shorter retention
+
+**Usage:**
+```hcl
+# Creates VM + Network Infrastructure
+module "azure_vm_network" {
+  source = "../../modules/azure-vm-network"
+  # VM and networking configuration
+}
+
+# Creates primary storage for application data
+module "azure_blob_storage" {
+  source = "../../modules/azure-blob-storage"
+  # Storage with 30-day retention and versioning
+}
+
+# Creates separate storage for logs
+module "azure_log_storage" {
+  source = "../../modules/azure-blob-storage"
+  # Log storage with 7-day retention
+}
+```
+
+This example showcases infrastructure patterns commonly used in production environments where applications require compute resources, persistent storage, and centralized logging.
 
 ## Quick Start
 

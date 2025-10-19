@@ -23,6 +23,7 @@ DIRS=(
     "examples/azure-vm"
     "examples/aws-vm"
     "examples/azure-blob-storage"
+    "examples/azure-multi-module"
     "examples/aws-storage"
 )
 
