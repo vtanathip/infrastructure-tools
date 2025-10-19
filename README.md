@@ -1,6 +1,29 @@
 # Infrastructure Tools
 
-A template repository for initializing cloud resources on Azure and AWS using Terraform. This repository provides reusable, modular, and testable infrastructure-as-code components.
+A template repository for building cloud infrastructure on Azure and AWS using Terraform. This repository provides reusable, production-ready modules and examples to help you quickly set up infrastructure-as-code for your projects.
+
+## 🚀 Using This Template
+
+### Option 1: GitHub Template (Recommended)
+1. Click the **"Use this template"** button at the top of this repository
+2. Create your new repository from this template
+3. Clone your new repository locally
+4. Follow the [Quick Start Guide](QUICK_START.md)
+
+### Option 2: Fork & Customize
+1. Fork this repository to your account
+2. Clone your fork locally
+3. Customize modules and examples for your needs
+4. See [Customization Guide](CUSTOMIZATION.md) for detailed instructions
+
+## 📋 What You Get
+
+After using this template, you'll have:
+- **Production-ready Terraform modules** for common infrastructure patterns
+- **Complete examples** showing how to use the modules
+- **Environment structure** (dev/staging/prod) ready for your use
+- **CI/CD pipeline** for automatic validation
+- **Comprehensive documentation** to get started quickly
 
 ## Features
 
@@ -21,14 +44,22 @@ infrastructure-tools/
 │   ├── aws-vm-network/          # AWS Windows VM with network
 │   ├── azure-blob-storage/      # Azure Blob Storage
 │   └── aws-s3-storage/          # AWS S3 Storage
-├── examples/                     # Example configurations
+├── examples/                     # Usage examples for testing modules
 │   ├── azure-vm/                # Azure VM example
 │   ├── aws-vm/                  # AWS VM example
 │   ├── azure-blob-storage/      # Azure blob storage example
 │   ├── azure-multi-module/      # Multi-module Azure infrastructure
 │   └── aws-storage/             # AWS storage example
-└── .github/workflows/           # CI/CD workflows
-    └── terraform-validate.yml   # Terraform validation workflow
+├── environments/                 # Environment-specific configurations
+│   ├── dev/                     # Development environment
+│   ├── staging/                 # Staging environment
+│   └── prod/                    # Production environment
+├── scripts/                     # Utility scripts
+├── .github/workflows/           # CI/CD workflows
+└── docs/                        # Documentation
+    ├── QUICK_START.md           # Getting started guide
+    ├── TERRAFORM_BASICS.md      # Terraform fundamentals
+    └── CUSTOMIZATION.md         # Template customization guide
 ```
 
 ## Modules
@@ -138,6 +169,30 @@ module "azure_log_storage" {
 ```
 
 This example showcases infrastructure patterns commonly used in production environments where applications require compute resources, persistent storage, and centralized logging.
+
+## 🔧 After Using This Template
+
+Once you've created your repository from this template:
+
+1. **Update repository information:**
+   - Change repository name and description in GitHub
+   - Update this README.md with your project-specific information
+   - Modify the repository URL in clone commands below
+
+2. **Customize for your project:**
+   - Edit `terraform.tfvars.example` files with your preferred defaults
+   - Update naming conventions in variables (change "myapp" prefixes)
+   - Modify tags and resource names to match your organization's standards
+
+3. **Remove template-specific sections:**
+   - Delete the "Using This Template" section above
+   - Remove this "After Using Template" section
+   - Keep the rest of the documentation as reference
+
+4. **Set up your environments:**
+   - Navigate to `environments/dev/`, `environments/staging/`, `environments/prod/`
+   - Configure each environment according to your needs
+   - See [environments/README.md](environments/README.md) for guidance
 
 ## Quick Start
 

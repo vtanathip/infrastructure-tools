@@ -1,0 +1,14 @@
+# Development Environment Configuration
+# Copy this file to terraform.tfvars and update values as needed
+
+# Required: VM Administrator Password
+admin_password = "ChangeMe123!SecurePassword"
+
+# Optional: Customize these values for your development environment
+# resource_group_name = "rg-myapp-dev"
+# location           = "East US"
+# prefix             = "myapp-dev"
+# project_name       = "MyApplication"
+# storage_prefix     = "myappdev"
+# admin_username     = "azureadmin"
+# owner_email        = "team@company.com"
